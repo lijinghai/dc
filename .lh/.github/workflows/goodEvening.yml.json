@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".github/workflows/goodEvening.yml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1710763482170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1710763482170,
+            "name": "Commit-0",
+            "content": "name: goodEvening for you\non:\n  workflow_dispatch:\n    branches:\n      - master\n  schedule:\n    # `分 时 天 月 周` 时按照标准时间 北京时间=标准时间+8 18表示北京时间早上2点\n    # 晚上 11：20\n    - cron: '06 12 * * *'\n# on:\n#   push:\n#     branches:\n#       - master\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n\n    steps:\n      - uses: actions/checkout@v2\n\n      # - name: Use Node@14.x # 步骤2\n      #   uses: actions/setup-node@v1 # 作用：安装nodejs\n      #   with:\n      #     node-version: 14\n\n      - name: Install pnpm\n        uses: pnpm/action-setup@v2.0.1\n        with:\n          version: 6.15.1\n\n      - name: Set node version to ${{ matrix.node_version }}\n        uses: actions/setup-node@v2\n        with:\n          node-version: ${{ matrix.node_version }}\n          cache: 'pnpm'\n\n      - name: Install\n        run: pnpm install\n\n      # - name: Build\n      #   run: pnpm build\n\n      # 运行脚本\n      - name: 运行脚本\n        run: pnpm start\n        env:\n          WX_COMPANY_ID: ${{ secrets.WX_COMPANY_ID }}\n          WX_APP_ID: ${{ secrets.WX_APP_ID }}\n          WX_APP_SECRET: ${{ secrets.WX_APP_SECRET }}\n          TIAN_API_KEY: ${{ secrets.TIAN_API_KEY }}\n          MESSAGE_TYPE: goodEvening\n"
+        }
+    ]
+}
